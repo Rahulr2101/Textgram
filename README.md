@@ -1,6 +1,6 @@
-# textgram
+# Textgram
 
-A new Flutter project.
+Textgram, A messaging app
 
 ## Getting Started
 

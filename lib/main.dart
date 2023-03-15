@@ -4,6 +4,7 @@ import 'package:textgram/signup.dart';
 import 'package:textgram/home.dart';
 
 void main() => runApp(MaterialApp(
+      debugShowCheckedModeBanner: false,
       initialRoute: 'login',
       routes: {
         'login': (context) => Mylogin(),

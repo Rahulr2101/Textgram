@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
-class Mylogin extends StatefulWidget {
-  const Mylogin({super.key});
+class MySignup extends StatefulWidget {
+  const MySignup({super.key});
 
   @override
-  State<Mylogin> createState() => _MyloginState();
+  State<MySignup> createState() => _MySignupState();
 }
 
-class _MyloginState extends State<Mylogin> {
+class _MySignupState extends State<MySignup> {
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage('assets/reading_0re1.png'), fit: BoxFit.cover)),
+              image: AssetImage('assets/home_hero.png'), fit: BoxFit.cover)),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Column(children: [
@@ -21,14 +21,14 @@ class _MyloginState extends State<Mylogin> {
             alignment: Alignment.center,
             padding: const EdgeInsets.only(top: 365),
             child: const Text(
-              'Welcome, back!',
+              'Hi,there!',
               style: TextStyle(color: Colors.white, fontSize: 15),
             ),
           ),
           Container(
             alignment: Alignment.center,
             child: const Text(
-              'Please Log In',
+              "Let's Get Started",
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 30,
@@ -53,9 +53,9 @@ class _MyloginState extends State<Mylogin> {
               TextField(
                 decoration: InputDecoration(
                     hintText: 'Password',
-                    fillColor: Color.fromARGB(-1, 241, 226, 204),
+                    fillColor: const Color.fromARGB(-1, 241, 226, 204),
                     filled: true,
-                    prefixIcon: Icon(Icons.key),
+                    prefixIcon: const Icon(Icons.key),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(40))),
               ),
@@ -67,12 +67,12 @@ class _MyloginState extends State<Mylogin> {
                     Navigator.pushNamed(context, 'home');
                   },
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(-1, 122, 82, 22),
+                      backgroundColor: const Color.fromARGB(-1, 122, 82, 22),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(40)),
-                      fixedSize: Size(380, 60)),
-                  child: Text(
-                    'Log in',
+                      fixedSize: const Size(380, 60)),
+                  child: const Text(
+                    'Create an Account',
                     style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
                   )),
               const SizedBox(
@@ -87,15 +87,15 @@ class _MyloginState extends State<Mylogin> {
               ),
               ElevatedButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, 'signup');
+                    Navigator.pushNamed(context, 'login');
                   },
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(-1, 122, 82, 22),
+                      backgroundColor: const Color.fromARGB(-1, 122, 82, 22),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(40)),
-                      fixedSize: Size(380, 60)),
+                      fixedSize: const Size(380, 60)),
                   child: const Text(
-                    'Create an Account',
+                    'Login',
                     style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
                   )),
             ]),

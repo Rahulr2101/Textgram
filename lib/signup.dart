@@ -64,7 +64,7 @@ class _MySignupState extends State<MySignup> {
               ),
               ElevatedButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, 'home');
+                    Navigator.pushReplacementNamed(context, 'home');
                   },
                   style: ElevatedButton.styleFrom(
                       backgroundColor: const Color.fromARGB(-1, 122, 82, 22),
@@ -87,7 +87,7 @@ class _MySignupState extends State<MySignup> {
               ),
               ElevatedButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, 'login');
+                    Navigator.pushReplacementNamed(context, 'login');
                   },
                   style: ElevatedButton.styleFrom(
                       backgroundColor: const Color.fromARGB(-1, 122, 82, 22),

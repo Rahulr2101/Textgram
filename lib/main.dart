@@ -5,6 +5,7 @@ import 'package:textgram/login.dart';
 import 'package:textgram/signup.dart';
 import 'package:textgram/home.dart';
 import 'package:textgram/Authpage.dart';
+import 'package:textgram/Verifyemailid.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,7 +33,7 @@ class MainPage extends StatelessWidget {
         } else if (snapshot.hasError) {
           return Center(child: Text('Something went wrong'));
         } else if (snapshot.hasData) {
-          return Home();
+          return VerifyEmail();
         } else {
           return AuthPage();
         }

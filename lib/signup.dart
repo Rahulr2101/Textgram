@@ -124,7 +124,13 @@ class _MySignupState extends State<MySignup> {
       );
     } on FirebaseAuthException catch (e) {
       print(e);
-    }
+      final snackBar = SnackBar(
+        content: Text((e.message).toString()),
+      );
+
+// Find the ScaffoldMessenger in the widget tree
+// and use it to show a SnackBar.
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
     navigatorkey.currentState!.popUntil((route) => route.isFirst);
   }
 }

@@ -131,6 +131,7 @@ class _MySignupState extends State<MySignup> {
 // Find the ScaffoldMessenger in the widget tree
 // and use it to show a SnackBar.
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    navigatorkey.currentState!.popUntil((route) => route.isFirst);
+      navigatorkey.currentState!.popUntil((route) => route.isFirst);
+    }
   }
 }

@@ -1,13 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:textgram/main.dart';
+import 'package:textgram/signup.dart';
+import 'package:basic_utils/basic_utils.dart';
 
 class Mylogin extends StatefulWidget {
-  const Mylogin({super.key});
+  final VoidCallback onClickedSignUp;
+  const Mylogin({
+    Key? key,
+    required this.onClickedSignUp,
+  }) : super(key: key);
 
   @override
   State<Mylogin> createState() => _MyloginState();
 }
 
 class _MyloginState extends State<Mylogin> {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -39,6 +49,7 @@ class _MyloginState extends State<Mylogin> {
             padding: const EdgeInsets.only(left: 20, top: 40, right: 20),
             child: Column(children: [
               TextField(
+                controller: emailController,
                 decoration: InputDecoration(
                     hintText: 'Username',
                     fillColor: const Color.fromARGB(-1, 241, 226, 204),
@@ -51,6 +62,7 @@ class _MyloginState extends State<Mylogin> {
                 height: 20,
               ),
               TextField(
+                controller: passwordController,
                 decoration: InputDecoration(
                     hintText: 'Password',
                     fillColor: Color.fromARGB(-1, 241, 226, 204),
@@ -63,9 +75,7 @@ class _MyloginState extends State<Mylogin> {
                 height: 20,
               ),
               ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushReplacementNamed(context, 'home');
-                  },
+                  onPressed: signIn,
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Color.fromARGB(-1, 122, 82, 22),
                       shape: RoundedRectangleBorder(
@@ -86,9 +96,7 @@ class _MyloginState extends State<Mylogin> {
                 height: 20,
               ),
               ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushReplacementNamed(context, 'signup');
-                  },
+                  onPressed: () => widget.onClickedSignUp(),
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Color.fromARGB(-1, 122, 82, 22),
                       shape: RoundedRectangleBorder(
@@ -103,5 +111,28 @@ class _MyloginState extends State<Mylogin> {
         ]),
       ),
     );
+  }
+
+  Future signIn() async {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => Center(child: CircularProgressIndicator()),
+    );
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: emailController.text.trim(),
+          password: passwordController.text.trim());
+    } on FirebaseAuthException catch (e) {
+      print(e);
+      final snackBar = SnackBar(
+        content: Text((e.message).toString()),
+      );
+
+// Find the ScaffoldMessenger in the widget tree
+// and use it to show a SnackBar.
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+    navigatorkey.currentState!.popUntil((route) => route.isFirst);
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:textgram/login.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -183,6 +184,11 @@ class NavigationDrawer extends StatelessWidget {
           leading: Icon(Icons.people),
           title: Text('contacts'),
           onTap: () {},
+        ),
+        ListTile(
+          leading: Icon(Icons.arrow_back),
+          title: Text("Sign out"),
+          onTap: () => FirebaseAuth.instance.signOut(),
         )
       ]);
 }

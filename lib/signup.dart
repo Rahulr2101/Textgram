@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:textgram/main.dart';
 
 class MySignup extends StatefulWidget {
-  const MySignup({super.key});
+  final Function() onClickedSignIn;
+  const MySignup({
+    Key? key,
+    required this.onClickedSignIn,
+  }) : super(key: key);
 
   @override
   State<MySignup> createState() => _MySignupState();
 }
 
 class _MySignupState extends State<MySignup> {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -39,6 +47,7 @@ class _MySignupState extends State<MySignup> {
             padding: const EdgeInsets.only(left: 20, top: 40, right: 20),
             child: Column(children: [
               TextField(
+                controller: emailController,
                 decoration: InputDecoration(
                     hintText: 'Username',
                     fillColor: const Color.fromARGB(-1, 241, 226, 204),
@@ -51,6 +60,7 @@ class _MySignupState extends State<MySignup> {
                 height: 20,
               ),
               TextField(
+                controller: passwordController,
                 decoration: InputDecoration(
                     hintText: 'Password',
                     fillColor: const Color.fromARGB(-1, 241, 226, 204),
@@ -63,9 +73,7 @@ class _MySignupState extends State<MySignup> {
                 height: 20,
               ),
               ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushReplacementNamed(context, 'home');
-                  },
+                  onPressed: SignUp,
                   style: ElevatedButton.styleFrom(
                       backgroundColor: const Color.fromARGB(-1, 122, 82, 22),
                       shape: RoundedRectangleBorder(
@@ -86,9 +94,7 @@ class _MySignupState extends State<MySignup> {
                 height: 20,
               ),
               ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushReplacementNamed(context, 'login');
-                  },
+                  onPressed: () => widget.onClickedSignIn(),
                   style: ElevatedButton.styleFrom(
                       backgroundColor: const Color.fromARGB(-1, 122, 82, 22),
                       shape: RoundedRectangleBorder(
@@ -103,5 +109,22 @@ class _MySignupState extends State<MySignup> {
         ]),
       ),
     );
+  }
+
+  Future SignUp() async {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => Center(child: CircularProgressIndicator()),
+    );
+    try {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+      );
+    } on FirebaseAuthException catch (e) {
+      print(e);
+    }
+    navigatorkey.currentState!.popUntil((route) => route.isFirst);
   }
 }
